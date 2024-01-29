@@ -7,6 +7,8 @@ class User < ApplicationRecord
     validates: :first_name, presence: true
     validates: :last_name, presence: true
 
+    # associations
+    has_many :posts 
     private
     def validate_username
         unless username =~ /\A[a-zA-Z0-9_]*[a-zA-Z][a-zA-Z0-9_]*\z/
