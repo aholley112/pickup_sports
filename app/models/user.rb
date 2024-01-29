@@ -5,4 +5,11 @@ class User < ApplicationRecord
     }
     validates: :first_name, presence: true
     validates: :last_name, presence: true
+
+    private
+    def validate_username
+        unless username =~ /\A[a-zA-Z0-9_]*[a-zA-Z][a-zA-Z0-9_]*\z/
+            errors.add(:username, "can only contain letters, digits, or underscores and must start with a letter")
+        end
+    end
 end
