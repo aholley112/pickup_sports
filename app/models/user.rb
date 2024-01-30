@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
     # events that user has created
 
-    has_many :created_event, class_name: 'Event', foreign_key: 'user_id' 
+    has_many :created_events, class_name: 'Event', foreign_key: 'user_id' 
 
     # events that user is participating in
 
