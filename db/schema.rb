@@ -10,7 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_27_034656) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_013626) do
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "content"
+    t.string "text"
+    t.datetime "start_date_time"
+    t.datetime "end_date_time"
+    t.integer "guests"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "locationable_type", null: false
+    t.integer "locationable_id", null: false
+    t.string "zip_code"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locationable_type", "locationable_id"], name: "index_locations_on_locationable"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "email", null: false
@@ -20,4 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_034656) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "events", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
 end
