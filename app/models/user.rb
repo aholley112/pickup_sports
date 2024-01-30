@@ -13,8 +13,12 @@ class User < ApplicationRecord
     has_many :comments, dependent: :destroy 
     has_one :location, as: :locationable, dependent: :destroy
 
+    # events that user has created
 
-    
+    has_many :created_event, class_name: 'Event', foreign_key: 'user_id' 
+
+    # events that user is participating in
+
     has_many :event_participants
     has_many :events, through: :event_participants
 
