@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :posts_index]
   def index
     users = User.all 
 
@@ -34,6 +34,13 @@ def destroy
   else
     render json: @user.errors, status: :unprocessable_entity
   end
+  end
+
+  def posts_index
+    user = User.find(params[:id])
+    user_posts = user.posts
+
+    render json: user_posts, status: ok
   end
 
   private

@@ -14,4 +14,12 @@ put '/users/:id', to: 'users#update'
 
 # localhost:3000/users/1
 delete '/users/:id', to: 'users#destroy'
+
+resources :user do
+get 'posts', to: 'users_posts#index'
+end
+
+resources :posts, only: [:create, :update, :destroy] 
+
+
 end
