@@ -19,7 +19,7 @@ resources :user do
 get 'posts', to: 'users_posts#index'
 end
 
-resources :posts, only: [:create, :update, :destroy] 
+resources :posts
 
 
 end
