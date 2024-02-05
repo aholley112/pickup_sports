@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy, :posts_index]
   def index
     users = User.all 
-
+# Send response 
     render json: users, status: 200
   end
 
