@@ -69,20 +69,20 @@ RSpec.describe "Posts", type: :request do
             post "/posts", params: post_attributes
           end
 
-          it 'returns a response with errors' do
+          it "returns a response with errors" do
             expect(response.status).to eq(422)
           end
         end
 
       end
       # update
-      descripe "PUT /posts/:id" do
+      describe "PUT /posts/:id" do
         context "with valid params" do
           let(:post) { create(:post) }
 
           before do
             post_attributes = attributes_for(:post, content: "updated content")
-            put '/posts/#{post.id}', params: post_attributes
+            put "/posts/#{post.id}", params: post_attributes
           end
 
           it "updates a post" do

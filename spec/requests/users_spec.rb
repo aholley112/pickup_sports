@@ -75,7 +75,7 @@ RSpec.describe "Users", type: :request do
 
       end
       # update
-      descripe "PUT /users/:id" do
+      describe "PUT /users/:id" do
         context "with valid params" do
           let(:user) { create(:user) }
 
