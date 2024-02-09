@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy, :posts_index]
+
+  before_action :set_user, only: [:show, :update, :destroy]
+
   def index
-    users = User.all 
-# Send response 
+    users = User.all
     render json: users, status: 200
   end
 
@@ -14,33 +15,33 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      render json: user, status: :unprocessable_entity
+      render json: user, status: :created
+    else
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
-def update
-
-  if user.update(user_params)
-    render json: @user, status: :ok
-  else
-    render json: @user.errors, status: :unprocessable_entity
-
+  def update
+    if @user.update(user_params)
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
-end
 
-def destroy
-  if @user.destroy
-    render json: nil, status: :ok
-  else
-    render json: @user.errors, status: :unprocessable_entity
-  end
+  def destroy
+    if @user.destroy
+      render json: nil, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   def posts_index
-    user = User.find(params[:id])
-    user_posts = user.posts
+    user = User.find(params[:user_id])
 
-    render json: user_posts, status: ok
+    user_posts = user.posts
+    render json: user_posts, status: :ok
   end
 
   private
@@ -50,6 +51,6 @@ def destroy
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :first_name, :last_name, :address)
+    params.permit(:username, :email, :first_name, :last_name, :password, :password_confirmation)
   end
 end
