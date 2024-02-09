@@ -1,29 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  context "validations" do
+  context 'validations' do
     it 'is not valid without a user' do
-      event = build(:event, user: nil);
-      expect(event).to_not be_valid
+      event = build(:event, user:nil)
+      expect(event).not_to be_valid
     end
 
     it 'is not valid without a title' do
-      event = build(:event, title: nil);
-      expect(event).to_not be_valid
+      event = build(:event, title: nil)
+      expect(event).not_to be_valid
     end
 
-    it 'is not valid with start_date_time before current time' do
-      event = build(:event, start_date_time: DateTime.now - 1);
-      expect(event).to_not be_valid
+    it 'is not valid with start_date_time before current_time' do
+      event = build(:event, start_date_time: DateTime.now - 1)
+      expect(event).not_to be_valid
     end
-    
+
     it 'is not valid with start_date_time after end_date_time' do
-      event = build(:event, start_date_time: DateTime.now + 1, end_date_time: DateTime.now);
+      event = build(:event, start_date_time: DateTime.now + 1, end_date_time: DateTime.now)
       expect(event).not_to be_valid
     end
   end
 
-  context "associations" do
+  context 'associations' do
     it 'belongs to a user' do
       event = build(:event)
       expect(event.user).to be_present
@@ -46,14 +46,13 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  context "destroy related associations" do
-    it "destroys event participants" do
+  context 'destroy related associations' do
+    it 'destroys event participants' do
       event = create(:event)
-      event_id = event.id 
+      event_id = event.id
       event.destroy
-      event_participants = EventParticipant.where(event_id: event.id) 
+      event_participants = EventParticipant.where(event_id: event_id)
       expect(event_participants).to be_empty
     end
-
   end
 end
