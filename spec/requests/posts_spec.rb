@@ -52,7 +52,7 @@ RSpec.describe "Posts", type: :request do
     context 'with valid params' do
 
       before do
-        post_attributes = attributes_for(:post, user_id: user.id)
+        post_attributes = attributes_for(:post)
         post '/posts', params: post_attributes, headers: { Authorization: "Bearer #{token}" }
       end
 
@@ -69,7 +69,7 @@ RSpec.describe "Posts", type: :request do
     context 'with invalid params' do
       
       before do
-        post_attributes = attributes_for(:post, user_id: nil)
+        post_attributes = attributes_for(:post, content: nil)
         post '/posts', params: post_attributes, headers: { Authorization: "Bearer #{token}" }
       end
 
