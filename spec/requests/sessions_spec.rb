@@ -10,7 +10,7 @@ RSpec.describe "Sessions", type: :request do
       post '/login', params: { username: user.username, password: user.password }
 
       expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body)).to incude('token')
+      expect(JSON.parse(response.body)).to include('token')
     end
 
     it 'does not authenticate the user and returns an error' do
