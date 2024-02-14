@@ -11,11 +11,11 @@ RSpec.describe "Users", type: :request do
       get "/users", headers: { Authorization: "Bearer #{token}" }
     end
     
-    it 'returns a sucessful response' do
+    it "returns a sucessful response" do
       expect(response).to be_successful
     end
 
-    it 'returns a response with all the users' do
+    it "returns a response with all the users" do
       expect(response.body).to eq(User.all.to_json)
     end
   end
@@ -29,11 +29,11 @@ RSpec.describe "Users", type: :request do
       get "/users/#{user.id}", headers: { Authorization: "Bearer #{token}" }
     end
 
-    it 'returns a sucessful response' do
+    it "returns a sucessful response" do
       expect(response).to be_successful
     end
 
-    it 'returns a response with the correct user' do
+    it "returns a response with the correct user" do
       expect(response.body).to eq(user.to_json)
     end
   end
@@ -47,11 +47,11 @@ RSpec.describe "Users", type: :request do
         post '/users', params: user_attributes
       end
 
-      it 'returns a sucessful response' do
+      it "returns a sucessful response" do
         expect(response).to be_successful
       end
 
-      it 'creates a new user' do
+      it "creates a new user" do
         expect(User.count).to eq(1)
       end
     end
@@ -108,18 +108,21 @@ RSpec.describe "Users", type: :request do
   # destroy
 
   describe 'DELETE /user/:id' do
-    let(:user) {create(:user)}
+    let(:user) { create(:user) }
     let(:token) { auth_token_for_user(user) }
-
+  
     before do
       delete "/users/#{user.id}", headers: { Authorization: "Bearer #{token}" }
     end
-
+  
     it 'deletes a user' do
       expect(User.count).to eq(0)
     end
-
+  
     it 'returns a successful response' do
+      unless response.successful?
+        puts "Response was not successful. Status: #{response.status}, Body: #{response.body}"
+      end
       expect(response).to be_successful
     end
   end

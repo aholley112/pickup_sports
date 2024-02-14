@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   context 'Validations tests' do
-    it 'is not valide without a first name' do
+    it 'is not valid without a first name' do
       user = build(:user, first_name: nil);
       expect(user).not_to be_valid
     end

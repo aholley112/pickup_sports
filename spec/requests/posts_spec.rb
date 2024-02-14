@@ -16,12 +16,12 @@ RSpec.describe "Posts", type: :request do
 
     
     # returns a successful response
-    it 'returns a sucessful response' do
+    it "returns a sucessful response" do
       expect(response).to be_successful
     end
 
     # return a response with all the posts
-    it 'returns a response with all the posts' do
+    it "returns a response with all the posts" do
       expect(response.body).to eq(Post.all.to_json)
     end
   end
