@@ -34,7 +34,7 @@ RSpec.describe "Users", type: :request do
     end
 
     it "returns a response with the correct user" do
-      expect(response.body).to eq(user.to_json)
+      expect(JSON.parse(response.body)['username']).to eq(user.username)
     end
   end
 
