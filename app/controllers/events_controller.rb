@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :update, :destroy]
     before_action :authenticate_request 
+
     def index 
         events = Event.all
         render json: events, status: :ok 
@@ -11,7 +12,7 @@ class EventsController < ApplicationController
     end
 
     def create
-        event = Event.new(event_params)
+        event = @current_user.created_events.new(event_params)
 
         if event.save
             render json: event, status: :created

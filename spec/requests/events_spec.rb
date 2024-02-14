@@ -17,12 +17,14 @@ RSpec.describe "Events", type: :request do
     let(:event) { create(:event) }
 
     it "returns a response with the specified event" do
-      get "/events/#{event.id}"
+      get "/events/#{event.id}", headers: { Authorization: "Bearer #{token}" }
       expect(response.body).to eq(event.to_json)
     end
   end
 
   describe "POST /events" do
+    let(:user) { create(:user) }
+    let(:token) { auth_token_for_user(user) }
     let(:sport) { create(:sport) }
 
     before do
@@ -41,6 +43,8 @@ RSpec.describe "Events", type: :request do
 
   # Update event
   describe "PUT /events/:id" do
+    let(:user) { create(:user) }
+    let(:token) { auth_token_for_user(user) }
     let(:event) { create(:event) }
 
     before do
@@ -55,6 +59,8 @@ RSpec.describe "Events", type: :request do
   end
 
   describe "DELETE /events/:id" do
+    let(:user) { create(:user) }
+    let(:token) { auth_token_for_user(user) }
     let(:event) { create(:event) }
 
     before do
