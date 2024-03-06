@@ -38,13 +38,13 @@ gem 'kaminari'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
+#Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
  
- gem "rack-cors"
+gem "rack-cors"
 
- group :production do
-  gem 'pg'
-  end
+group :production do
+  gem "pg", ">= 0.18", "< 2.0"
+end
 
 group :development, :test do
 gem "sqlite3", "~> 1.4"

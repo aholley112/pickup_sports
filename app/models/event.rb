@@ -1,4 +1,8 @@
 class Event < ApplicationRecord
+
+  # active storage
+  has_one_attached :cover_image
+
   validates :start_date_time, :end_date_time, :guests, presence: true
   validates :title, presence: true
 
