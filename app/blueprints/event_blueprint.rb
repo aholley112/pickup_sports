@@ -11,4 +11,8 @@ class EventBlueprint < Blueprinter::Base
         fields :title, :start_date_time, :end_date_time, :guests, :sport 
         association :user, blueprint: UserBlueprint, view: :short
     end
+    view :long do
+        fields :title, :start_date_time, :end_date_time, :guests, :sport 
+        association :user, blueprint: UserBlueprint, view: :short
+    end
 end
