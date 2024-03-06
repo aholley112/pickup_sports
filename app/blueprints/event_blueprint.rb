@@ -12,7 +12,9 @@ class EventBlueprint < Blueprinter::Base
         association :user, blueprint: UserBlueprint, view: :short
     end
     view :long do
-        fields :title, :start_date_time, :end_date_time, :guests, :sport 
+        fields :title, :start_date_time, :end_date_time, :guests, :sports, :content, :cover_image_url 
         association :user, blueprint: UserBlueprint, view: :short
     end
+
+
 end
