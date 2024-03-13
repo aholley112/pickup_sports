@@ -9,11 +9,14 @@ class EventBlueprint < Blueprinter::Base
 
     view :short do
         fields :title, :start_date_time, :end_date_time, :guests, :sport 
-        association :user, blueprint: UserBlueprint, view: :short
+        association :creator, blueprint: UserBlueprint, view: :short
     end
     view :long do
         fields :title, :start_date_time, :end_date_time, :guests, :sports, :content, :cover_image_url 
-        association :user, blueprint: UserBlueprint, view: :short
+        association :participants, blueprint: UserBlueprint, view: :normal
+        association :creator, blueprint: UserBlueprint, view: :normal
+        field :has_joined do |event, options|
+            event.has_joined?(options[:current_user])
     end
 
 

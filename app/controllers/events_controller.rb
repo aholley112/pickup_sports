@@ -57,7 +57,10 @@ class EventsController < ApplicationController
 
         event.participants << @current_user
 
-        render json: event, status: :ok
+        Pusher.trigger(event.creator.id, 'notification', {
+            event_id: event.id,
+            notification: "#{@current_user.username} has joined #{event.title}!"
+        })
 
         head :ok
     end
@@ -66,6 +69,10 @@ class EventsController < ApplicationController
         event = Event.find(params[:event_id]) 
 
         event.participate.delete(@current_user)
+        Pusher.trigger(event.creator.id, 'notification', {
+            event_id: event.id,
+            notification: "#{@current_user.username} has left #{event.title}!"
+        })
         head :ok
 
     end
